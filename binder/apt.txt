@@ -1,2 +1,4 @@
+ssh
+htop
 openjdk-8-jdk
 wget
