@@ -1,2 +1,3 @@
 jupyterlab
 mrjob
+py2neo
