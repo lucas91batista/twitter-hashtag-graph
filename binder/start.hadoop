@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#loading envvars
+#for auto load in binderhub:
+source ~/.profile
+#for manual start: run 
+#source $(pwd)/.bashrc 
+
+#Starting sshd server
+/usr/sbin/sshd -f ~/resources/configs/ssh/sshd_config 
+
+# Adding names to know hosts. This step avoids yes/no host confirmation.
+ssh -o "StrictHostKeyChecking no" $USER@localhost -p 8822 -C "exit" 
+ssh -o "StrictHostKeyChecking no" $USER@0.0.0.0   -p 8822 -C "exit"
+
+# Copying configurations files to the Hadoop folder 
+cp ~/resources/configs/hadoop/${HADOOP_VERSION}/core-site.xml ${HADOOP_HOME}/etc/hadoop/ 
+cp ~/resources/configs/hadoop/${HADOOP_VERSION}/hdfs-site.xml ${HADOOP_HOME}/etc/hadoop/
+
+# Formatting the filesystem
+hdfs namenode -format -force -nonInteractive >> /dev/null
+
+start-dfs.sh                                                                                && \
+#Copying YARN configurations for Pseudo-Distributed Mode
+cp ~/resources/configs/hadoop/${HADOOP_VERSION}/mapred-site.xml ${HADOOP_HOME}/etc/hadoop/  && \
+cp ~/resources/configs/hadoop/${HADOOP_VERSION}/yarn-site.xml   ${HADOOP_HOME}/etc/hadoop/  && \
+
+start-yarn.sh                                                                               && \
+
+hdfs dfs -mkdir /user/                                                                      && \
+hdfs dfs -mkdir /user/lucasbatista/                                                         && \
+hdfs dfs -mkdir /user/$USER                                                                 &
+
+# echo "${USER} $(pwd) ${HADOOP_HOME} ${HADOOP_VERSION}" > startresult.txt

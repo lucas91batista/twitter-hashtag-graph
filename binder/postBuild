@@ -1,0 +1,83 @@
+#!/bin/bash
+
+###############################################################
+#             moving to a local installation folder           #
+###############################################################
+
+mkdir ~/resources/local
+cd    ~/resources/local
+
+###############################################################
+#             hadoop-related commands                         #
+###############################################################
+
+export HADOOP_VERSION=2.9.2
+echo "export HADOOP_VERSION=${HADOOP_VERSION}" >> ~/.bashrc
+echo "export HADOOP_VERSION=${HADOOP_VERSION}" >> ~/.profile
+
+export HADOOP_HOME=$(pwd)/hadoop-${HADOOP_VERSION}
+echo "export HADOOP_HOME=${HADOOP_HOME}"       >> ~/.bashrc
+echo "export HADOOP_HOME=${HADOOP_HOME}"       >> ~/.profile
+
+
+wget http://ftp.unicamp.br/pub/apache/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz -q   && \
+tar -xvf hadoop-${HADOOP_VERSION}.tar.gz >> /dev/null                                                             && \
+rm       hadoop-${HADOOP_VERSION}.tar.gz              
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 " >> ~/.bashrc
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 " >> ~/.profile
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 " >> ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh
+
+# adding bin and sbin to $path
+echo "export PATH=\$PATH:\$HADOOP_HOME/bin"  >> ~/.bashrc
+echo "export PATH=\$PATH:\$HADOOP_HOME/bin"  >> ~/.profile
+echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >> ~/.bashrc
+echo "export PATH=\$PATH:\$HADOOP_HOME/sbin" >> ~/.profile
+
+# creating ssh-related folders
+mkdir ~/.ssh/etc/ssh -p
+
+# setup passphraseless ssh (forcing the adding to know hosts)
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa  &&   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && chmod 0600 ~/.ssh/authorized_keys 
+
+# generating keys for sshd server
+ssh-keygen -A -f ~/.ssh 
+chmod 600 ~/.ssh/etc/ssh/* -R
+
+# hadoop 3.*.*
+export PDSH_RCMD_TYPE=ssh
+echo "export PDSH_RCMD_TYPE=ssh" >> ~/.bashrc
+echo "export PDSH_RCMD_TYPE=ssh" >> ~/.profile
+
+# Adding ssh options to Hadoop via envvar
+# connecting in a diferent port (-p 8822)
+# avoiding host key checking (-o StrictHostKeyChecking=no)
+export HADOOP_SSH_OPTS="-o StrictHostKeyChecking=no -p 8822"
+echo "export HADOOP_SSH_OPTS=\"-o StrictHostKeyChecking=no -p 8822\"" >> ~/.bashrc
+echo "export HADOOP_SSH_OPTS=\"-o StrictHostKeyChecking=no -p 8822\"" >> ~/.profile
+
+
+
+
+
+###############################################################
+#                 flume-related commands                      #
+###############################################################
+
+export FLUME_VERSION=1.9.0
+echo "export FLUME_VERSION=${FLUME_VERSION}" >> ~/.bashrc
+echo "export FLUME_VERSION=${FLUME_VERSION}" >> ~/.profile
+
+export FLUME_HOME=$(pwd)/flume-${FLUME_VERSION}
+echo "export FLUME_HOME=${FLUME_HOME}"       >> ~/.bashrc
+echo "export FLUME_HOME=${FLUME_HOME}"       >> ~/.profile
+
+wget http://ftp.unicamp.br/pub/apache/flume/${FLUME_VERSION}/apache-flume-${FLUME_VERSION}-bin.tar.gz -q && \
+tar -xf apache-flume-${FLUME_VERSION}-bin.tar.gz > /dev/null                                             && \
+rm      apache-flume-1.9.0-bin.tar.gz                                                                    && \
+mv      apache-flume-${FLUME_VERSION}-bin        flume-${FLUME_VERSION} 
+
+# adding bin/ to $path
+echo "export PATH=\$PATH:\$FLUME_HOME/bin"   >> ~/.bashrc
+echo "export PATH=\$PATH:\$FLUME_HOME/bin"   >> ~/.profile
