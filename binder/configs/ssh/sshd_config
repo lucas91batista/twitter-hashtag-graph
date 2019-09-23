@@ -1,0 +1,6 @@
+Port 8822
+
+HostKey ~/.ssh/etc/ssh/ssh_host_rsa_key
+HostKey ~/.ssh/etc/ssh/ssh_host_ecdsa_key
+HostKey ~/.ssh/etc/ssh/ssh_host_ed25519_key
+PidFile ~/.ssh/sshd.pid
