@@ -81,3 +81,26 @@ mv      apache-flume-${FLUME_VERSION}-bin        flume-${FLUME_VERSION}
 # adding bin/ to $path
 echo "export PATH=\$PATH:\$FLUME_HOME/bin"   >> ~/.bashrc
 echo "export PATH=\$PATH:\$FLUME_HOME/bin"   >> ~/.profile
+
+
+###############################################################
+#             neo4j installation commands                   #
+###############################################################
+
+export NEO4J_VERSION=3.5.8
+echo "export NEO4J_VERSION=${NEO4J_VERSION}" >> ~/.bashrc
+echo "export NEO4J_VERSION=${NEO4J_VERSION}" >> ~/.profile
+
+export NEO4J_HOME=$(pwd)/neo4j-${NEO4J_VERSION}
+echo "export NEO4J_HOME=${NEO4J_HOME}"       >> ~/.bashrc
+echo "export NEO4J_HOME=${NEO4J_HOME}"       >> ~/.profile
+
+wget https://neo4j.com/artifact.php?name=neo4j-community-${NEO4J_VERSION}-unix.tar.gz -q          && \
+mv   artifact.php?name=neo4j-community-${NEO4J_VERSION}-unix.tar.gz neo4j-${NEO4J_VERSION}.tar.gz && \
+tar  -xvf neo4j-${NEO4J_VERSION}.tar.gz >/dev/null                                                && \
+rm   neo4j-${NEO4J_VERSION}.tar.gz                                                                && \
+mv   neo4j-community-${NEO4J_VERSION} neo4j-${NEO4J_VERSION}
+
+# adding bin and sbin to $path
+echo "export PATH=\$PATH:\$NEO4J_HOME/bin"  >> ~/.bashrc
+echo "export PATH=\$PATH:\$NEO4J_HOME/bin"  >> ~/.profile
