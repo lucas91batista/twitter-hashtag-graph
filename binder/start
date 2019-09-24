@@ -1,10 +1,13 @@
 #!/bin/bash
 
 
-chmod +x ~/binder/start.hadoop 
+chmod +x ~/binder/start.hadoop
+chmod +x ~/binder/start.neo4j 
 
 
-~/binder/start.hadoop &
+~/binder/start.hadoop && \
+sleep 3                && \
+~/binder/start.neo4j   &
 
 
 
