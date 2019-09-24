@@ -1,3 +1,4 @@
 jupyterlab
 mrjob
 py2neo
+ipython-cypher
