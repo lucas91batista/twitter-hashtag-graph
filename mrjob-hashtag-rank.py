@@ -11,7 +11,7 @@ class RankHashtag(MRJob):
         ]
 
     def mapper_get_tweet(self, _, line):
-        line = json.parse(line)
+        line = json.loads(line)
         tweet = line['text']
         words = tweet.split(' ')
         for hashtag in words:
