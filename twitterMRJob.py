@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 from mrjob.job import MRJob
 from mrjob.step import MRStep
@@ -15,6 +15,8 @@ class TwitterMRJob(MRJob):
     def tweet_filter(self, _, line):
         tweetJson = json.loads(line)
         user = tweetJson['user']['name']
+        #problem: for example, user: I'm Jerry ;
+        user = user.replace('\'', '')
         tweet = tweetJson['text']
         words = tweet.split (' ')
         hashtag = []
@@ -26,17 +28,17 @@ class TwitterMRJob(MRJob):
     def tweet_graph(self, user, hashtag):
         graph = Graph("bolt://127.0.0.1:7687")
         for index, aux in enumerate(hashtag):
-            #problem: for example, user: I'm Jerry ; Solution: use "" in id value
-            query1 = """MERGE (person:User{id: \""""+user+"""\"}) MERGE (tw:Hashtag{hashtag:'"""+aux+"""'}) CREATE (person)-[:tweeted]->(tw)"""
+            
+            query1 = """MERGE (person:User{id: '"""+user+"""'}) MERGE (tw:Hashtag{hashtag:'"""+aux+"""'}) CREATE (person)-[:tweeted]->(tw)"""
             graph.run(query1)
-            #consult=[]
+            consult=[]
             i=index
             while i < len(hashtag)-1:
                     query2 = """MERGE (tw1:Hashtag{hashtag: '"""+hashtag[index]+"""'}) MERGE (tw2:Hashtag{hashtag:'"""+hashtag[i+1]+"""'}) CREATE (tw1)-[:together]->(tw2)"""
-                    #consult.append(query2)
+                    consult.append(query2)
                     graph.run(query2)
                     i+=1
-            #yield query1, consult
+            yield query1, consult
 
 if __name__ == '__main__':
     TwitterMRJob.run()
