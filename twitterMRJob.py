@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 from py2neo import Graph
@@ -12,7 +14,7 @@ class TwitterMRJob(MRJob):
     
     def tweet_filter(self, _, line):
         tweetJson = json.loads(line)
-        user = tweetJson['user']['name']  
+        user = tweetJson['user']['name']
         tweet = tweetJson['text']
         words = tweet.split (' ')
         hashtag = []
@@ -24,7 +26,8 @@ class TwitterMRJob(MRJob):
     def tweet_graph(self, user, hashtag):
         graph = Graph("bolt://127.0.0.1:7687")
         for index, aux in enumerate(hashtag):
-            query1 = """MERGE (person:User{id: '"""+user+"""'}) MERGE (tw:Hashtag{hashtag:'"""+aux+"""'}) CREATE (person)-[:tweeted]->(tw)"""
+            #problem: for example, user: I'm Jerry ; Solution: use "" in id value
+            query1 = """MERGE (person:User{id: \""""+user+"""\"}) MERGE (tw:Hashtag{hashtag:'"""+aux+"""'}) CREATE (person)-[:tweeted]->(tw)"""
             graph.run(query1)
             #consult=[]
             i=index
