@@ -2,7 +2,6 @@
 
 from mrjob.job import MRJob
 from mrjob.step import MRStep
-from py2neo import Graph
 import json
 
 class TwitterMRJob(MRJob):
@@ -26,6 +25,10 @@ class TwitterMRJob(MRJob):
         yield user, hashtag
         
     def tweet_graph(self, user, hashtag):
+        import sys
+        sys.path.insert(0, '/srv/conda/envs/notebook/lib/python3.7/site-packages')
+
+        from py2neo import Graph
         graph = Graph("bolt://127.0.0.1:7687")
         for index, aux in enumerate(hashtag):
             query1 = """MERGE (person:User{id: '"""+user+"""'}) MERGE (tw:Hashtag{hashtag:'"""+aux+"""'}) CREATE (person)-[:tweeted]->(tw)"""
