@@ -3,6 +3,7 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 import json
+import re
 
 class TwitterMRJob(MRJob):
     def steps(self):
@@ -14,13 +15,27 @@ class TwitterMRJob(MRJob):
     def tweet_filter(self, _, line):
         tweetJson = json.loads(line)
         user = tweetJson['user']['name']
-        #problem: for example, user: I'm Jerry ;
-        user = user.replace('\'', '')
+        #Removing non alphanumeric characters. Problem: user: I'm Jerry ;
+        user = ''.join(c for c in user if c.isalnum())
+        #Removing unicodes
+        user = user.encode('ascii','ignore')
+        user = user.decode("ascii")
+        user = user.strip()
         tweet = tweetJson['text']
+        #Removing control characters \n \r \t
+        tweet = re.sub(r'[\n\r\t]', ' ', tweet)
         words = tweet.split (' ')
         hashtag = []
         for word in words:
             if "#" in word:
+                #Removing unicodes
+                word = word.encode('ascii','ignore')
+                word = word.decode("ascii")
+                word = word.strip()
+                #Converting to lowercase
+                word = word.lower()
+                #Removing non alphanumeric characters
+                word = ''.join(c for c in word if c.isalnum() or c =='#')
                 hashtag.append(word)
         yield user, hashtag
         
@@ -33,14 +48,11 @@ class TwitterMRJob(MRJob):
         for index, aux in enumerate(hashtag):
             query1 = """MERGE (person:User{id: '"""+user+"""'}) MERGE (tw:Hashtag{hashtag:'"""+aux+"""'}) CREATE (person)-[:tweeted]->(tw)"""
             graph.run(query1)
-            #consult=[]
             i=index
             while i < len(hashtag)-1:
                     query2 = """MERGE (tw1:Hashtag{hashtag: '"""+hashtag[index]+"""'}) MERGE (tw2:Hashtag{hashtag:'"""+hashtag[i+1]+"""'}) CREATE (tw1)-[:together]->(tw2)"""
-                    #consult.append(query2)
                     graph.run(query2)
                     i+=1
-            #yield query1, consult
 
 if __name__ == '__main__':
     TwitterMRJob.run()
