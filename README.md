@@ -60,6 +60,15 @@ Para processamento em Batch foi utilizado o **Hadoop Map Reduce**. O Hadoop Map 
 
 ```
 
+**Informações extraídas**
+``` 
+Nome do usuário: Twitter User
+Hashtags: #Hadoop #BigData
+``` 
+**Grafo gerado**
+![Grafo exemplo](https://github.com/lucas91batista/twitter-hashtag-graph/blob/master/images/Graph_example.jpg)
+
+
 O Hadoop Map Reduce foi escolhido por ser facilmente integrado com o Hadoop HDFS e também para fixar o conhecimento e melhorar o entendimento do Hadoop MapReduce. O código para as funções Map e Reduce foram escritos em python utilizando a biblioteca MRJob (https://mrjob.readthedocs.io/en/latest/).
 
 Nesta etapa, utilizamos 
