@@ -46,9 +46,17 @@ Para processamento em Batch foi utilizado o **Hadoop Map Reduce**. O Hadoop Map 
 {  "created_at": "Thu Apr 06 15:24:15 +0000 2017",  
    "id_str": "850006245121695744",  
    "text": "Aprendendo algumas ferramentas para manipulação de dados #Hadoop #BigData",  
-   "user": {    "id": 2244994945,    "name": "Twitter User",    "screen_name": "TwitterDev",    "location": "Internet",    "url": "https:\/\/dev.twitter.com\/",    "description": "Your official source for Twitter Platform news, updates & events. Need technical help? Visit https:\/\/twittercommunity.com\/ \u2328\ufe0f #TapIntoTwitter"  },  
+   "user": {    "id": 2244994945,    "name": "Twitter User",    "screen_name": "TwitterDev",    
+               "location": "Internet",    "url": "https:\/\/dev.twitter.com\/",    
+               "description": "Your official source for Twitter Platform news, updates & events. 
+                              Need technical help? Visit https:\/\/twittercommunity.com\/ \u2328\ufe0f #TapIntoTwitter"  },  
    "place": {     },  
-   "entities": {    "hashtags": [          ],    "urls": [      {        "url": "https:\/\/t.co\/XweGngmxlP",        "unwound": {          "url": "https:\/\/cards.twitter.com\/cards\/18ce53wgo4h\/3xo1c",          "title": "Building the Future of the Twitter API Platform"        }      }    ],    "user_mentions": [         ]  }}
+   "entities": {    "hashtags": [          ],    
+                    "urls": [      {        "url": "https:\/\/t.co\/XweGngmxlP",        
+                    "unwound": {          "url": "https:\/\/cards.twitter.com\/cards\/18ce53wgo4h\/3xo1c",          
+                    "title": "Building the Future of the Twitter API Platform"        }      }    ],    
+                    "user_mentions": [         ]  }
+}
 
 ```
 
