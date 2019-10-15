@@ -28,7 +28,7 @@ A ferramenta utilizada para ingestão dos dados foi o **Flume**. O Flume baixa t
 O Flume foi escolhido por ser uma ferramenta escalável horizontalmente, possuir tolerância a falhas, garantir a entrega das mensagens e ser facilmente integrado ao Twitter e outras tecnologias utilizadas no projeto. 
 
 ## Sistema de arquivos distribuídos
-O sistema de arquivos distribuídos utilizado foi o **Hadoop HDFS**. o Hadoop HDFS armazena os Tweets que foram baixados pelo Flume.
+O sistema de arquivos distribuídos utilizado foi o **Hadoop HDFS**. O Hadoop HDFS armazena os Tweets que foram baixados pelo Flume.
 
 O Hadoop HDFS foi escolhido por ser distribuído, escalável horizontalmente, tolerante a falhas e ser facilmente integrado com diversas ferramentas que foram utilizadas no projeto ou que podem ser utilizadas para outras funcionalidades no futuro.
 
@@ -66,9 +66,22 @@ Nome do usuário: Twitter User
 Hashtags: #Hadoop #BigData
 ``` 
 **Grafo gerado**
+
 ![Grafo exemplo](https://github.com/lucas91batista/twitter-hashtag-graph/blob/master/images/Graph_example.jpg)
 
 
+As seguintes transformações foram aplicadas nos dados nos dois processos MapReduce:
+* Remoção de caracteres não alpha-numéricos;
+* Remoção de unicodes;
+* Remoção de caracteres de controle (\n \t);
+* Conversão das hashtags para minúsculo.
+
 O Hadoop Map Reduce foi escolhido por ser facilmente integrado com o Hadoop HDFS e também para fixar o conhecimento e melhorar o entendimento do Hadoop MapReduce. O código para as funções Map e Reduce foram escritos em python utilizando a biblioteca MRJob (https://mrjob.readthedocs.io/en/latest/).
 
-Nesta etapa, utilizamos 
+## Banco de Dados
+Para armazenar os dados já organizados foi utilizado o **Neo4J**. O Neo4j armazena o grafo que foi gerado pelo processo MapReduce permitindo que os dados sejam explorados utilizando ferramentas de grafo, por exemplo, detecção de comunidade, etc.
+
+O banco de dados NoSQL escolhido foi o de grafos, pois este projeto quer explorar a conexão entre os usuários e as hashtags. O banco escolhido foi o Neo4J pois utiliza o grafo de propriedades como modelo, possui uma linguagem de consulta própria (Cypher) que pode ser utilizada para explorar os dados e possui diversos algoritmos implementados que podem ser utilizados para explorar o grafo.
+
+## Consumo
+Com os dados do Twitter transformados e armazenados no Neo4J, podemos consumir esses dados para realizar algumas análises, testar alguma hipótese, etc. Nesta etapa foi utilizado o Python apenas para visualizar o grafo gerado.
