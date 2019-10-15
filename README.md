@@ -79,9 +79,9 @@ As seguintes transformações foram aplicadas nos dados nos dois processos MapRe
 O Hadoop Map Reduce foi escolhido por ser facilmente integrado com o Hadoop HDFS e também para fixar o conhecimento e melhorar o entendimento do Hadoop MapReduce. O código para as funções Map e Reduce foram escritos em python utilizando a biblioteca MRJob (https://mrjob.readthedocs.io/en/latest/).
 
 ## Banco de Dados
-Para armazenar os dados já organizados foi utilizado o **Neo4J**. O Neo4j armazena o grafo que foi gerado pelo processo MapReduce permitindo que os dados sejam explorados utilizando ferramentas de grafo, por exemplo, detecção de comunidade, etc.
+Para armazenar os dados já organizados foi utilizado o **Neo4J**. O Neo4j armazena o grafo que foi gerado pelo processo MapReduce permitindo que os dados sejam explorados utilizando operações orientadas a grafo, por exemplo, detecção de comunidade, caminhos mínimos etc.
 
-O banco de dados NoSQL escolhido foi o de grafos, pois este projeto quer explorar a conexão entre os usuários e as hashtags. O banco escolhido foi o Neo4J pois utiliza o grafo de propriedades como modelo, possui uma linguagem de consulta própria (Cypher) que pode ser utilizada para explorar os dados e possui diversos algoritmos implementados que podem ser utilizados para explorar o grafo.
+O banco de dados NoSQL escolhido foi o de grafos, pois este projeto quer explorar a conexão entre os usuários e as hashtags. O banco escolhido foi o Neo4J pois utiliza como modelo o grafo de propriedades, possui uma linguagem de consulta própria (Cypher) para explorar os dados e possui diversos algoritmos implementados que podem ser utilizados para explorar os dados (https://neo4j.com/docs/graph-algorithms/current/introduction/).
 
 ## Consumo
 Com os dados do Twitter transformados e armazenados no Neo4J, podemos consumir esses dados para realizar algumas análises, testar alguma hipótese, etc. Nesta etapa foi utilizado o Python apenas para visualizar o grafo gerado.
