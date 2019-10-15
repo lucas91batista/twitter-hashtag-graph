@@ -23,5 +23,19 @@ Com o ambiente em execução, basta abrir o arquivo .ipynb e ir clicando no "Pla
 
 ![Arquitetura](https://github.com/lucas91batista/twitter-hashtag-graph/blob/master/images/Arch-twitter-hashtag-graph.png)
 
+
 ## Ingestão de dados
-A ferramenta utilizada 
+A ferramenta utilizada para ingestão dos dados foi o **Flume**. O Flume foi escolhido por ser uma ferramenta escalável horizontalmente, possuir tolerância a falhas, garantir a entrega das mensagens e ser facilmente integrado ao Twitter e outras ferramentas utilizadas no projeto.
+
+## Sistema de arquivos distribuídos
+O sistema de arquivos distribuídos utilizado foi o **Hadoop HDFS**. O Hadoop HDFS foi escolhido por ser distribuído, escalável horizontalmente, tolerante a falhas e ser facilmente integrado com diversas ferramentas que foram utilizadas no projeto ou que podem ser utilizadas para outras funcionalidades no futuro.
+
+## Processamento em Batch
+Para processamento em Batch foi utilizado o **Hadoop Map Reduce**. O Hadoop Map Reduce foi escolhido por ser facilmente integrado com o Hadoop HDFS e também para fixar o conhecimento e melhorar o entendimento do Hadoop MapReduce. O código para as funções Map e Reduce foram escritos em python utilizando a biblioteca MRJob (https://mrjob.readthedocs.io/en/latest/).
+
+Nesta etapa, utilizamos Map Reduce para:
+* criar um rank das Hashtags para descobrirmos qual o "Trend Topics" entre os tweets baixados. Por exemplo:
+```
+#hadoop 30
+#bigdata 50
+``` 
