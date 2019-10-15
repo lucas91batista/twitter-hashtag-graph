@@ -7,7 +7,7 @@ Este projeto utiliza ferramentas de Big Data para extraír dados do Twitter, pro
 
 ## Executando o projeto
 
-Clique em algum banner abaixo para executar o projeto em uma instância Binder com as ferramentas necessárias instaladas. O projeto é executado no navegador, sem a necessidade de instalar as ferramentas na sua máquina =). 
+Clique no banner abaixo para executar o projeto em uma instância Binder com as ferramentas necessárias instaladas. O projeto é executado no navegador, sem a necessidade de instalar as ferramentas na sua máquina =). 
 
 [![Binder](https://notebooks.gesis.org/binder/badge_logo.svg)](https://notebooks.gesis.org/binder/v2/gh/lucas91batista/twitter-hashtag-graph/master?urlpath=lab)
 
