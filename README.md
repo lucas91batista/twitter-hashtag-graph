@@ -9,9 +9,11 @@ Este projeto utiliza ferramentas de Big Data para extraír dados do Twitter, pro
 
 Clique em algum banner abaixo para executar o projeto em uma instância Binder com as ferramentas necessárias instaladas. O projeto é executado no navegador, sem a necessidade de instalar as ferramentas na sua máquina =). 
 
-[![launch @ gesis.org][badge-jupyterlab-gesis-org]]](https://notebooks.gesis.org/binder/v2/gh/lucas91batista/twitter-hashtag-graph/master?urlpath=lab)
+[![launch @ gesis.org](https://notebooks.gesis.org/binder/badge_logo.svg)]](https://notebooks.gesis.org/binder/v2/gh/lucas91batista/twitter-hashtag-graph/master?urlpath=lab)
 
-[![launch @ gke.mybinder.org][badge-jupyterlab-gke-mybinder-org]](https://mybinder.org/v2/gh/lucas91batista/twitter-hashtag-graph/master?urlpath=lab)
+[![launch @ gke.mybinder.org][badge-jupyterlab-gke-mybinder-org]](hhttps://notebooks.gesis.org/binder/v2/gh/lucas91batista/twitter-hashtag-graph/master?urlpath=lab)
+
+[![launch @ gke.mybinder.org][https://mybinder.org/badge_logo.svg]](https://mybinder.org/v2/gh/lucas91batista/twitter-hashtag-graph/master?urlpath=lab)
 
 Com o ambiente em execução, basta abrir o arquivo .ipynb e ir clicando no "Play" para executar as células:
 
