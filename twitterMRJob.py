@@ -40,6 +40,10 @@ class TwitterMRJob(MRJob):
         yield user, hashtag
         
     def tweet_graph(self, user, hashtag):
+        # This import avoid the error described bellow when we use 
+        # from py2neo import Graph and execute the script in hadoop-streaming  
+        # Error: java.lang.RuntimeException: PipeMapRed.waitOutputThreads():
+        #subprocess failed with code 1
         import sys
         sys.path.insert(0, '/srv/conda/envs/notebook/lib/python3.7/site-packages')
 
