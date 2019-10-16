@@ -11,7 +11,7 @@ Clique no banner abaixo para executar o projeto em uma instância Binder com as 
 
 [![Binder](https://notebooks.gesis.org/binder/badge_logo.svg)](https://notebooks.gesis.org/binder/v2/gh/lucas91batista/twitter-hashtag-graph/master?urlpath=lab)
 
-Com o ambiente em execução, basta abrir o arquivo .ipynb e ir clicando no "Play" para executar as células:
+Com o ambiente em execução, basta abrir o arquivo Download-tweets.ipynb e ir clicando no "Play" para executar as células:
 
 ![Executando o projeto](https://github.com/lucas91batista/twitter-hashtag-graph/blob/master/images/executeCellsJupyter.gif)
 
