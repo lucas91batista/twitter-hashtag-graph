@@ -19,8 +19,7 @@ export HADOOP_HOME=$(pwd)/hadoop-${HADOOP_VERSION}
 echo "export HADOOP_HOME=${HADOOP_HOME}"       >> ~/.bashrc
 echo "export HADOOP_HOME=${HADOOP_HOME}"       >> ~/.profile
 
-
-wget http://ftp.unicamp.br/pub/apache/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz -q   && \
+wget https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz -q   && \
 tar -xvf hadoop-${HADOOP_VERSION}.tar.gz >> /dev/null                                                             && \
 rm       hadoop-${HADOOP_VERSION}.tar.gz              
 
@@ -56,7 +55,6 @@ echo "export PDSH_RCMD_TYPE=ssh" >> ~/.profile
 export HADOOP_SSH_OPTS="-o StrictHostKeyChecking=no -p 8822"
 echo "export HADOOP_SSH_OPTS=\"-o StrictHostKeyChecking=no -p 8822\"" >> ~/.bashrc
 echo "export HADOOP_SSH_OPTS=\"-o StrictHostKeyChecking=no -p 8822\"" >> ~/.profile
-
 
 
 
